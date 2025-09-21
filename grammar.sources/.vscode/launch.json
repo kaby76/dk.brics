@@ -9,7 +9,7 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "dk.brics.grammar.main.Main",
-            "projectName": "grammar.sources_432e2b48",
+            "projectName": "grammar.sources_1ecd678d",
             "exceptionBreakpoints": [
                 {
                     "exception": "java.lang.Throwable",
@@ -22,8 +22,8 @@
             ],
             "args": [
                 "-v",
-                "C:\\Users\\Kenne\\Downloads\\ambiguity\\grammar.sources\\palindromes.cfg",
-                "C:\\Users\\Kenne\\Downloads\\ambiguity\\grammar.sources\\aba.txt"
+                "C:\\Users\\Kenne\\Downloads\\ambiguity\\dk.brics\\grammar.sources\\palindromes.cfg",
+                "C:\\Users\\Kenne\\Downloads\\ambiguity\\dk.brics\\grammar.sources\\aba.txt"
             ]
         }
     ]
