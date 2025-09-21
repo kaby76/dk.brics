@@ -13,7 +13,7 @@ But, I had to modify the code to work with Java v24, and extended it in a couple
 the code.
 
 To get it to run, use VSCode: `cd grammar.sources; code .` You may need to modify class paths, etc.,
-but the VSCode config is set up to debug and parse a palindromes.cfg grammmar example.
+but the VSCode config is set up to debug and parse a palindromes.cfg grammar example.
 
 Example grammars are here: https://www.brics.dk/grammar/examples.html
 
