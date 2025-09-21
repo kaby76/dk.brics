@@ -27,11 +27,10 @@ the code looks for explicitly named symbols. Otherwise, the code just parses and
 However, I found both the graphical and web server UI cumbersome to use, especially when trying to perform "edit/compile/run/debug"
 development. So I used the command-line interface mostly.
 
-* I had to change quite a bit of the code from `varN`, where `N` is some integer, into a realistic,
-purposeful name so I could debug and fix the code.
+* I had to change quite a bit of the code, renaming `Sometype varN `, where `N` is some integer, into a realistic,
+purposeful name. I couldn't debug and fix the code otherwise.
 
-* I don't think it computes multiple trees for an ambiguous parse because only one parse tree is computed
-and returned from the `parse()` function call.
+* `Parser.parse()` computes only a single AST for an ambiguous parse.
 
 * I found the `print()` method for printing an AST to be completely impossible to read. So, I wrote the routine
 `myprint()` to print out the AST as an indented structure, using the names of the nodes of the nonterminals.
