@@ -19,5 +19,10 @@ so kept with the command=line interface.
 * I had to change quite a bit of the code from `varN`, where `N` is some integer, into a realistic,
 purposeful name so I could debug and fix the code.
 
-* I don't think it computes multiple trees for an ambiguous parse.
+* I don't think it computes multiple trees for an ambiguous parse because only one parse tree is computed
+and returned from the `parse()` function call.
+
+* I found the `print()` method for printing an AST to be completely impossible to read. So, I wrote the routine
+`myprint()` to print out the AST as an indented structure, using the names of the nodes of the nonterminals.
+This output is much simpler to visualize and check the tree structure.
 
