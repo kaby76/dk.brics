@@ -12,7 +12,8 @@ As far as the code goes, I'm not sure where I found it on the internet.
 But, I had to modify the code to work with Java v24, and extended it in a couple of ways to debug
 the code.
 
-To get it to run, use VSCode: `cd grammar.sources; code .`
+To get it to run, use VSCode: `cd grammar.sources; code .` You may need to modify class paths, etc.,
+but the VSCode config is set up to debug and parse a palindromes.cfg grammmar example.
 
 Example grammars are here: https://www.brics.dk/grammar/examples.html
 
