@@ -1,7 +1,16 @@
 # dk.brics
 
-Reviving the Brics parser and grammar analyzer. Not sure where I found it on the internet.
-This code was modified to work with Java v24.
+This repo is a revival of the Brics parser and grammar analyzer, described in this paper:
+
+Brabrand, Claus, Robert Giegerich, and Anders Møller. "Analyzing ambiguity of context-free grammars." Science of Computer Programming 75.3 (2010): 176-191.
+
+https://doi.org/10.1016/j.scico.2009.11.002
+
+The purpose of the revival is to study the code and the algorithms used to detect grammar ambiguity.
+
+As far as the code goes, I'm not sure where I found it on the internet.
+But, I had to modify the code to work with Java v24, and extended it in a couple of ways to debug
+the code.
 
 To get it to run, use VSCode: `cd grammar.sources; code .`
 
