@@ -18,12 +18,13 @@ Example grammars are here: https://www.brics.dk/grammar/examples.html
 
 There are a few idiosyncrasies with this code.
 
-* The parser only computes a parse tree if every
+* The parser only computes an abstract syntax tree if every
 right-hand-side symbol of a rule is attributed, using `[ foobar ]` after the symbol. Apparently,
-the code looks for explicitly named symbols.
+the code looks for explicitly named symbols. Otherwise, the code just parses and returns a mostly empty tree.
 
-* There is a graphical UI and a command-line interface. I found the graphical UI cumbersome to use,
-so kept with the command=line interface.
+* There are both graphical and command-line interfaces. In addition, there's a web server for running the code.
+However, I found both the graphical and web server UI cumbersome to use, especially when trying to perform "edit/compile/run/debug"
+development. So I used the command-line interface mostly.
 
 * I had to change quite a bit of the code from `varN`, where `N` is some integer, into a realistic,
 purposeful name so I could debug and fix the code.
