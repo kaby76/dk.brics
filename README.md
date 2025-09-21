@@ -20,7 +20,7 @@ Example grammars are here: https://www.brics.dk/grammar/examples.html
 There are a few idiosyncrasies with this code.
 
 * The parser only computes an abstract syntax tree if every
-right-hand-side symbol of a rule is attributed, using `[ foobar ]` after the symbol. Apparently,
+right-hand-side symbol of a rule is attributed, using `[ foobar ]` after a nonterminal or terminal symbol. Apparently,
 the code looks for explicitly named symbols. Otherwise, the code just parses and returns a mostly empty tree.
 
 * There are both graphical and command-line interfaces. In addition, there's a web server for running the code.
