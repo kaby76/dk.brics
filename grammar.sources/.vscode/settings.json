@@ -1,0 +1,11 @@
+{
+    "java.project.sourcePaths": [
+        "."
+    ],
+    "java.project.referencedLibraries": [
+        "c:\\Users\\Kenne\\Downloads\\log4j-1.2.9.jar",
+        "c:\\Users\\Kenne\\Downloads\\ambiguity\\automaton-1.12\\target\\automaton-1.12-4.jar",
+        "c:\\Users\\Kenne\\Downloads\\soot.jar",
+        "c:\\Users\\Kenne\\Downloads\\ambiguity\\string-2.1\\dist\\string.jar"
+    ]
+}

@@ -1,0 +1,234 @@
+package dk.brics.grammar.main;
+
+import dk.brics.misc.Loader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.util.List;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+public class MainServlet extends HttpServlet {
+   protected void doPost(HttpServletRequest var1, HttpServletResponse var2) throws IOException {
+      if (!ServletFileUpload.isMultipartContent(var1)) {
+         var2.sendError(400);
+      } else {
+         String var3 = "check";
+         String var4 = "";
+         String var5 = "";
+         String var6 = "";
+         String var7 = "";
+         boolean var8 = false;
+         boolean var9 = false;
+         boolean var10 = false;
+         String var11 = null;
+         String var12 = null;
+         int var17 = 0;
+         String var16 = null;
+         String var15 = null;
+         String var14;
+         String var13 = var14 = Charset.defaultCharset().name();
+         DiskFileItemFactory var18 = new DiskFileItemFactory();
+         var18.setSizeThreshold(100000);
+         ServletFileUpload var19 = new ServletFileUpload(var18);
+         var19.setSizeMax(10000L);
+
+         List var20;
+         try {
+            var20 = var19.parseRequest(var1);
+         } catch (FileUploadException var36) {
+            var2.sendError(400, var36.getMessage());
+            return;
+         }
+
+         for (FileItem var22 : var20) {
+            if (var22.isFormField()) {
+               String var23 = var22.getFieldName();
+               String var24 = var22.getString();
+               if (var23.equals("mode")) {
+                  var3 = var24;
+               } else if (var23.equals("grammar")) {
+                  var4 = var24;
+               } else if (var23.equals("grammarurl")) {
+                  var5 = var24.trim();
+               } else if (var23.equals("text")) {
+                  var6 = var24;
+               } else if (var23.equals("texturl")) {
+                  var7 = var24.trim();
+               } else if (var23.equals("unfold_level")) {
+                  try {
+                     var17 = Integer.parseInt(var24.trim());
+                  } catch (NumberFormatException var35) {
+                     var17 = 0;
+                  }
+               } else if (var23.equals("unfold_left")) {
+                  var15 = var24;
+               } else if (var23.equals("unfold_right")) {
+                  var16 = var24;
+               } else if (var23.equals("grammarencoding") && !var24.equals("default")) {
+                  var13 = var24;
+               } else if (var23.equals("textencoding") && !var24.equals("default")) {
+                  var14 = var24;
+               } else if (var23.equals("verbose")) {
+                  var8 = true;
+               } else if (var23.equals("dumpast")) {
+                  var9 = true;
+               } else if (var23.equals("tokenize")) {
+                  var10 = true;
+               }
+            }
+         }
+
+         if (var17 < 0) {
+            var17 = 0;
+         }
+
+         for (FileItem var38 : var20) {
+            if (!var38.isFormField() && var38.getName().length() > 0) {
+               String var40 = var38.getFieldName();
+               if (var40.equals("grammarupload")) {
+                  var4 = var38.getString(var13);
+                  var11 = var38.getName();
+               } else if (var40.equals("textupload")) {
+                  var6 = var38.getString(var14);
+                  var12 = var38.getName();
+               }
+            }
+         }
+
+         if (var5.length() > 0) {
+            if (!var5.startsWith("http://")) {
+               var2.sendError(400, "illegal URL");
+               return;
+            }
+
+            var4 = Loader.getString(var5, var13);
+            var11 = var5;
+         } else if (var11 == null) {
+            var11 = "[input grammar]";
+         }
+
+         if (var3.equals("parse")) {
+            if (var7.length() > 0) {
+               if (!var7.startsWith("http://")) {
+                  var2.sendError(400, "illegal URL");
+                  return;
+               }
+
+               var6 = Loader.getString(var7, var14);
+               var12 = var7;
+            } else if (var12 == null) {
+               var12 = "[input text]";
+            }
+         }
+
+         String var39 = var1.getHeader("x-forwarded-for");
+         if (var39 == null) {
+            var39 = var1.getRemoteHost();
+         }
+
+         this.log(
+            "request from "
+               + var39
+               + ": "
+               + var3
+               + ","
+               + var11
+               + ","
+               + var4.length()
+               + ","
+               + var12
+               + ","
+               + var6.length()
+               + ","
+               + ","
+               + var8
+               + ","
+               + var9
+               + ","
+               + var10
+         );
+         var2.setDateHeader("Expires", 0L);
+         var2.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+         var2.setHeader("Pragma", "no-cache");
+         var2.setContentType("text/html");
+         var2.setCharacterEncoding("ISO-8859-1");
+         MainServlet.HtmlEscapingPrintWriter var41 = new MainServlet.HtmlEscapingPrintWriter(var2.getWriter());
+         var41.uprintln(
+            "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"><html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=ISO-8859-1\"><title>dk.brics.grammar</title></head></body>"
+         );
+         var41.uprint("<h1>dk.brics.grammar reply:</h1><pre>");
+
+         try {
+            TimeoutThread var42 = new TimeoutThread(10);
+
+            try {
+               Main.run(var4, var11, var6, var12, var3.equals("analyze"), var17, var15, var16, var8, var9, var10, false, var41);
+            } finally {
+               var42.cancel();
+            }
+         } catch (IllegalArgumentException var33) {
+            var41.println("input error: " + var33.getMessage());
+            Thread.interrupted();
+         } catch (Throwable var34) {
+            this.log(var34.getMessage());
+            var41.println("timeout, execution aborted");
+            Thread.interrupted();
+         }
+
+         var41.uprintln("</pre><form name=\"back\" action=\"\"><input type=button value=\"Back to the demo\" onClick=\"history.go(-1)\"></form></body></html>");
+         var41.close();
+      }
+   }
+
+   private static String htmlEscape(String var0) {
+      StringBuffer var1 = new StringBuffer();
+
+      for (int var2 = 0; var2 < var0.length(); var2++) {
+         char var3 = var0.charAt(var2);
+         switch (var3) {
+            case '"':
+               var1.append("&quot;");
+               break;
+            case '&':
+               var1.append("&amp;");
+               break;
+            case '<':
+               var1.append("&lt;");
+               break;
+            case '>':
+               var1.append("&gt;");
+               break;
+            default:
+               var1.append(var3);
+         }
+      }
+
+      return var1.toString();
+   }
+
+   static class HtmlEscapingPrintWriter extends PrintWriter {
+      public HtmlEscapingPrintWriter(PrintWriter var1) {
+         super(var1, true);
+      }
+
+      @Override
+      public void print(String var1) {
+         super.print(MainServlet.htmlEscape(var1));
+      }
+
+      public void uprint(String var1) {
+         super.print(var1);
+      }
+
+      public void uprintln(String var1) {
+         super.print(var1);
+         super.println();
+      }
+   }
+}

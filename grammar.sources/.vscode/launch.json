@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "dk.brics.grammar.main.Main",
+            "projectName": "grammar.sources_432e2b48",
+            "exceptionBreakpoints": [
+                {
+                    "exception": "java.lang.Throwable",
+                    "condition": "true"
+                },
+                {
+                    "exception": "java.io.IOException",
+                    "condition": "true"
+                }
+            ],
+            "args": [
+                "-v",
+                "C:\\Users\\Kenne\\Downloads\\ambiguity\\grammar.sources\\palindromes.cfg",
+                "C:\\Users\\Kenne\\Downloads\\ambiguity\\grammar.sources\\aba.txt"
+            ]
+        }
+    ]
+}

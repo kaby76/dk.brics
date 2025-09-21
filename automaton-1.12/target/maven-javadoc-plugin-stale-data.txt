@@ -1,0 +1,69 @@
+@options
+@argfile
+-encoding
+'UTF-8'
+-protected
+-source
+'8'
+-sourcepath
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src;C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/target/apidocs'
+-docencoding
+'UTF-8'
+-Xdoclint:none
+-doctitle
+'dk.brics.automaton 1.12-4 API'
+-link
+'https://docs.oracle.com/javase/8/docs/api'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' 'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/target/javadoc-bundle-options'
+-nodeprecated
+-nohelp
+-notree
+-use
+-version
+-windowtitle
+'dk.brics.automaton 1.12-4 API'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/Automaton.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/AutomatonMatcher.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/AutomatonProvider.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/BasicAutomata.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/BasicOperations.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/Datatypes.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/DatatypesAutomatonProvider.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/MinimizationOperations.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/RegExp.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/RunAutomaton.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/ShuffleOperations.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/SpecialOperations.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/State.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/StatePair.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/StringUnionOperations.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/Transition.java'
+'C:/Users/Kenne/Downloads/ambiguity/automaton-1.12/src/dk/brics/automaton/TransitionComparator.java'
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\src\Unicode.txt = 1641210088000
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\src = 1757547220096
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\generated-sources\annotations = 1757547288797
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\allclasses-index.html = 1757547314720
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\allpackages-index.html = 1757547314726
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\constant-values.html = 1757547314430
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\copy.svg = 1757547314851
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\element-list = 1757547314385
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\index-all.html = 1757547314834
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\index.html = 1757547314840
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\jquery-ui.overrides.css = 1757547314939
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\member-search-index.js = 1757547314737
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\module-search-index.js = 1757547314729
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\package-search-index.js = 1757547314731
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\script.js = 1757547314847
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\search.js = 1757547314857
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\serialized-form.html = 1757547314460
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\stylesheet.css = 1757547314845
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\tag-search-index.js = 1757547314740
+C:\Users\Kenne\Downloads\ambiguity\automaton-1.12\target\apidocs\type-search-index.js = 1757547314734

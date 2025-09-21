@@ -1,0 +1,17 @@
+dk.brics.string
+dk.brics.string.charset
+dk.brics.string.diagnostics
+dk.brics.string.directedgraph
+dk.brics.string.external
+dk.brics.string.flow
+dk.brics.string.flow.operations
+dk.brics.string.grammar
+dk.brics.string.grammar.operations
+dk.brics.string.intermediate
+dk.brics.string.intermediate.operations
+dk.brics.string.java
+dk.brics.string.mlfa
+dk.brics.string.mlfa.operations
+dk.brics.string.runtime
+dk.brics.string.stringoperations
+dk.brics.string.util
