@@ -28,9 +28,15 @@ However, I found both the graphical and web server UI cumbersome to use, especia
 development. So I used the command-line interface mostly.
 
 * I had to change quite a bit of the code, renaming `Sometype varN `, where `N` is some integer, into a realistic,
-purposeful name. I couldn't debug and fix the code otherwise.
+purposeful name. I couldn't debug and fix the code otherwise. It
+seems strange that variable names are `varN`, likely the result of generating Java code
+from another language, or because of purposeful obfuscation.
 
 * `Parser.parse()` computes only a single AST for an ambiguous parse.
+Again, this seems rather strange because the parser algorithm
+could easily handle this
+and because the code also checks for grammar ambiguity
+via the heuristics described in the paper.
 
 * I found the `print()` method for printing an AST to be completely impossible to read. So, I wrote the routine
 `myprint()` to print out the AST as an indented structure, using the names of the nodes of the nonterminals.
