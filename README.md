@@ -9,8 +9,8 @@ https://doi.org/10.1016/j.scico.2009.11.002
 The purpose of the revival is to study the code and the algorithms used to detect grammar ambiguity.
 
 As far as the code goes, I'm not sure where I found it on the internet.
-But, I had to modify the code to work with Java v24, and extended it in a couple of ways to debug
-the code.
+I had to modify the code to work with Java v24, and extended it in a couple of ways to debug
+the code. The original code is checked in here as a .zip file.
 
 To get it to run, use VSCode: `cd grammar.sources; code .` You may need to modify class paths, etc.,
 but the VSCode config is set up to debug and parse a palindromes.cfg grammar example.
@@ -25,7 +25,9 @@ the code looks for explicitly named symbols. Otherwise, the code just parses and
 
 * There are both graphical and command-line interfaces. In addition, there's a web server for running the code.
 However, I found both the graphical and web server UI cumbersome to use, especially when trying to perform "edit/compile/run/debug"
-development. So I used the command-line interface mostly.
+development. So I used the command-line interface mostly. In addition, I couldn't get
+all the files to compile due to ancient dependencies that I couldn't figure out.
+So, I just punted on these.
 
 * I had to change quite a bit of the code, renaming `Sometype varN `, where `N` is some integer, into a realistic,
 purposeful name. I couldn't debug and fix the code otherwise. It
