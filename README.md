@@ -40,7 +40,7 @@ could easily handle this
 and because the code also checks for grammar ambiguity
 via the heuristics described in the paper.
 
-* I found the `print()` method for printing an AST to be completely impossible to read. So, I wrote the routine
-`myprint()` to print out the AST as an indented structure, using the names of the nodes of the nonterminals.
+* I found the `print()` method for printing an AST to be impossible to read. So, I wrote the routine
+`myprint()` to print the AST as an indented structure, using the names of the nodes of the nonterminals.
 This output is much simpler to visualize and check the tree structure.
 
