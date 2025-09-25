@@ -44,3 +44,6 @@ via the heuristics described in the paper.
 `myprint()` to print the AST as an indented structure, using the names of the nodes of the nonterminals.
 This output is much simpler to visualize and check the tree structure.
 
+* The parser appears to be an implementation of the Earley algorithm. Some of the basic functions
+for First and Follow have been renamed to reflect that purpose.
+
