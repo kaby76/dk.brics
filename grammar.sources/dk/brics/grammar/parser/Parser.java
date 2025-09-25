@@ -36,13 +36,13 @@ public class Parser {
    private PrintWriter out;
    private boolean enable_selectfollows = true;
    private int max_i;
-   private SortedSet<PState> pending;
-   private Set<PState> visited;
+   private SortedSet<PState> _pending;
+   private Set<PState> _visited;
    private Map<Integer, Map<String, List<PState>>> ntmap;
    private Map<Integer, Map<String, List<PState>>> complmap;
-   private Map<String, CharSet> select;
-   private Map<String, CharSet> follows;
-   private String x;
+   private Map<String, CharSet> first;
+   private Map<String, CharSet> follow;
+   private String _input;
    private long max_memory;
    private long max_states;
    private long total_states;
@@ -54,15 +54,15 @@ public class Parser {
       this.unparser = new Unparser(grammar);
       this.checkDebugMode();
       if (this.enable_selectfollows) {
-         this.select = new HashMap<>();
-         this.follows = new HashMap<>();
-         SelectFollowsFinder var3 = new SelectFollowsFinder(grammar);
-         this.select = var3.getNonterminalSelect();
-         this.follows = var3.getNonterminalFollows();
+         this.first = new HashMap<>();
+         this.follow = new HashMap<>();
+         SelectFollowsFinder first_follow_finder = new SelectFollowsFinder(grammar);
+         this.first = first_follow_finder.getNonterminalFirst();
+         this.follow = first_follow_finder.getNonterminalFollows();
          if (this.debug) {
             for (String var5 : grammar.getNonterminals()) {
-               var2.println("select(" + var5 + ")=" + this.select.get(var5));
-               var2.println("follows(" + var5 + ")=" + this.follows.get(var5));
+               var2.println("select(" + var5 + ")=" + this.first.get(var5));
+               var2.println("follows(" + var5 + ")=" + this.follow.get(var5));
             }
          }
       }
@@ -95,12 +95,12 @@ public class Parser {
       boolean var5 = this.enable_selectfollows;
 
       try {
-         this.pending = new TreeSet<>();
-         this.visited = new HashSet<>();
+         this._pending = new TreeSet<>();
+         this._visited = new HashSet<>();
          this.ntmap = new HashMap<>();
          this.complmap = new HashMap<>();
          this.max_states = this.total_states = 0L;
-         this.x = input;
+         this._input = input;
          this.max_i = 0;
          if (var3 != null) {
             this.enable_selectfollows = false;
@@ -112,9 +112,9 @@ public class Parser {
             }
          }
 
-         while (!this.pending.isEmpty()) {
-            PState var16 = this.pending.first();
-            this.pending.remove(var16);
+         while (!this._pending.isEmpty()) {
+            PState var16 = this._pending.first();
+            this._pending.remove(var16);
             if (this.debug) {
                this.out.println("processing " + var16.prod.print(var16.getRemaining()) + " from index " + var16.from + " to " + var16.current);
             }
@@ -162,11 +162,11 @@ public class Parser {
             throw new ParseException(input_file_name, input, this.max_i);
          }
       } finally {
-         this.pending = null;
-         this.visited = null;
+         this._pending = null;
+         this._visited = null;
          this.ntmap = null;
          this.complmap = null;
-         this.x = null;
+         this._input = null;
          this.enable_selectfollows = var5;
          if (this.debug) {
             this.out.println("max_states = " + this.max_states);
@@ -240,8 +240,8 @@ public class Parser {
       boolean var4 = true;
       Node var5 = var1.getChild(var2);
       if (var5 != null) {
-         String var6 = this.unparser.unparse(var3, this.x);
-         String var7 = this.unparser.unparse(var5, this.x);
+         String var6 = this.unparser.unparse(var3, this._input);
+         String var7 = this.unparser.unparse(var5, this._input);
          if (!var6.equals(var7)) {
             var4 = false;
          }
@@ -263,7 +263,7 @@ public class Parser {
          public Object visitStringTerminalEntity(StringTerminalEntity var1x) {
             String var2x = var1x.getString();
             int var3x = var2x.length();
-            if (var1.current + var3x <= Parser.this.x.length() && Parser.this.x.substring(var1.current, var1.current + var3x).equals(var2x)) {
+            if (var1.current + var3x <= Parser.this._input.length() && Parser.this._input.substring(var1.current, var1.current + var3x).equals(var2x)) {
                if (Parser.this.debug) {
                   Parser.this.out.println("matched string terminal " + var2x);
                }
@@ -328,11 +328,11 @@ public class Parser {
                   }
                }
 
-               if (var1.current + var5x >= Parser.this.x.length()) {
+               if (var1.current + var5x >= Parser.this._input.length()) {
                   break;
                }
 
-               var4 = var4.step(Parser.this.x.charAt(var1.current + var5x++));
+               var4 = var4.step(Parser.this._input.charAt(var1.current + var5x++));
             }
 
             if (var1x.isMax() && !var2x.isEmpty()) {
@@ -348,7 +348,7 @@ public class Parser {
 
          @Override
          public Object visitEOFTerminalEntity(EOFTerminalEntity var1x) {
-            if (var1.current == Parser.this.x.length()) {
+            if (var1.current == Parser.this._input.length()) {
                if (Parser.this.debug) {
                   Parser.this.out.println("matched EOF");
                }
@@ -389,7 +389,7 @@ public class Parser {
          this.max_i = var1.current;
       }
 
-      if (!this.visited.contains(var1)) {
+      if (!this._visited.contains(var1)) {
          if (!this.isApplicable(var1)) {
             if (this.debug) {
                this.out.println("nonmatching lookahead for " + var1.prod.print(var1.getRemaining()) + " from index " + var1.from + " to " + var1.current);
@@ -399,11 +399,11 @@ public class Parser {
                this.out.println("adding " + var1.prod.print(var1.getRemaining()) + " from index " + var1.from + " to pending[" + var1.current + "]");
             }
 
-            this.visited.add(var1);
+            this._visited.add(var1);
             this.total_states++;
-            this.pending.add(var1);
-            if ((long)this.pending.size() > this.max_states) {
-               this.max_states = (long)this.pending.size();
+            this._pending.add(var1);
+            if ((long)this._pending.size() > this.max_states) {
+               this.max_states = (long)this._pending.size();
             }
 
             Runtime var2 = Runtime.getRuntime();
@@ -432,9 +432,9 @@ public class Parser {
          }
       } else {
          if (this.enable_selectfollows) {
-            CharSet var2 = this.follows.get(var1.prod.getNonterminal());
+            CharSet var2 = this.follow.get(var1.prod.getNonterminal());
             if (var2 != null
-               && (var1.current < this.x.length() && !var2.contains(this.x.charAt(var1.current)) || var1.current == this.x.length() && !var2.containsEOF())) {
+               && (var1.current < this._input.length() && !var2.contains(this._input.charAt(var1.current)) || var1.current == this._input.length() && !var2.containsEOF())) {
                return false;
             }
          }
@@ -448,11 +448,11 @@ public class Parser {
          new EntityVisitor<Boolean>() {
             public Boolean visitNonterminalEntity(NonterminalEntity var1x) {
                if (Parser.this.enable_selectfollows) {
-                  CharSet var2 = Parser.this.select.get(var1x.getNonterminal());
+                  CharSet var2 = Parser.this.first.get(var1x.getNonterminal());
                   if (var2 != null
                      && (
-                        var1.current < Parser.this.x.length() && !var2.contains(Parser.this.x.charAt(var1.current))
-                           || var1.current == Parser.this.x.length() && !var2.containsEOF()
+                        var1.current < Parser.this._input.length() && !var2.contains(Parser.this._input.charAt(var1.current))
+                           || var1.current == Parser.this._input.length() && !var2.containsEOF()
                      )) {
                      return false;
                   }
@@ -466,11 +466,11 @@ public class Parser {
                int var3 = 0;
 
                while (var2 != null && !var2.isAccept() && var3 <= 100) {
-                  if (var1.current + var3 >= Parser.this.x.length()) {
+                  if (var1.current + var3 >= Parser.this._input.length()) {
                      return false;
                   }
 
-                  var2 = var2.step(Parser.this.x.charAt(var1.current + var3++));
+                  var2 = var2.step(Parser.this._input.charAt(var1.current + var3++));
                }
 
                return var2 != null;
@@ -479,11 +479,11 @@ public class Parser {
             public Boolean visitStringTerminalEntity(StringTerminalEntity var1x) {
                String var2 = var1x.getString();
                int var3 = var2.length();
-               return var1.current + var3 <= Parser.this.x.length() && Parser.this.x.substring(var1.current, var1.current + var3).equals(var2);
+               return var1.current + var3 <= Parser.this._input.length() && Parser.this._input.substring(var1.current, var1.current + var3).equals(var2);
             }
 
             public Boolean visitEOFTerminalEntity(EOFTerminalEntity var1x) {
-               return var1.current == Parser.this.x.length();
+               return var1.current == Parser.this._input.length();
             }
          }
       );

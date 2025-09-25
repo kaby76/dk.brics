@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class SelectFollowsFinder {
-   private Map<String, CharSet> select;
+   private Map<String, CharSet> first;
    private Map<String, CharSet> follows;
 
    public SelectFollowsFinder(Grammar var1) {
@@ -142,17 +142,17 @@ public class SelectFollowsFinder {
 
       ((CharSetNode)var16.get(var1.getStart())).getCS().addEOF();
       CharSetNode.fixpoint(var19);
-      this.select = new HashMap<>();
+      this.first = new HashMap<>();
       this.follows = new HashMap<>();
 
       for (String var28 : var1.getNonterminals()) {
-         this.select.put(var28, ((CharSetNode)var17.get(var28)).getCS());
+         this.first.put(var28, ((CharSetNode)var17.get(var28)).getCS());
          this.follows.put(var28, ((CharSetNode)var16.get(var28)).getCS());
       }
    }
 
-   public Map<String, CharSet> getNonterminalSelect() {
-      return this.select;
+   public Map<String, CharSet> getNonterminalFirst() {
+      return this.first;
    }
 
    public Map<String, CharSet> getNonterminalFollows() {
